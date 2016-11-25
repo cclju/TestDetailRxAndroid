@@ -28,8 +28,8 @@ public class SafeActivity extends RxAppCompatActivity {
         setContentView(R.layout.activity_simple);
         ButterKnife.bind(this);
 
-        Observable.interval(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
+        Observable.interval(1, TimeUnit.SECONDS) // 默认运行在新线程上
+                .observeOn(AndroidSchedulers.mainThread()) // 所以指定线程
                 .compose(bindToLifecycle()) // 管理生命周期, 防止内存泄露
                 .subscribe(this::showTime);
     }
